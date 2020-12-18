@@ -6,25 +6,57 @@ namespace FunWithQuizzes
 {
     public class TrueOrFalse : Question
     {
-        public bool CorrectAnswer { get; set; }
-        
-        public TrueOrFalse(string message, int point, bool correctAnswer) : base(point, message)
+        private bool CorrectAnswer { get; set; }
+
+        public TrueOrFalse(int pointValue, string text, bool correctAnswer) : base(pointValue, text)
         {
-            Message = message;
-            Point = point;
+            PointValue = 1;
             CorrectAnswer = correctAnswer;
         }
 
+        public bool IsCorrectAnswer(bool possibleAnswer)
+        {
+            if (possibleAnswer == CorrectAnswer)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public override void DisplayAnswers()
         {
-            Console.WriteLine(Message);
+            Console.WriteLine("True or False");
         }
 
-        //public override int GetAnswers()
-        //{
-        //    Console.WriteLine(Point++);
-        //}
-
+        public override int GetAnswers()
+        {
+            Console.WriteLine("What will your answer be? Type 't' for True and 'f' for False");
+            string userAnswer = Console.ReadLine();
+            if (userAnswer.IndexOf('t') >= 0)
+            {
+                if (IsCorrectAnswer(true))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                if (IsCorrectAnswer(false))
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
     }
 }

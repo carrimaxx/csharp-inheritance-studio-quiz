@@ -4,16 +4,11 @@ using System.Text;
 
 namespace FunWithQuizzes
 {
-    public class Quiz // list of questions
+    public class Quiz
     {
-        // TODO add questions
-        // TODO run the quiz --> print the list of questions, method
-        // TODO grade the quiz --> 
-
         public List<Question> Questions { get; set; }
         public int Score { get; set; }
         private int Total { get; set; }
-
 
         public Quiz(List<Question> questions)
         {
@@ -22,8 +17,36 @@ namespace FunWithQuizzes
             Total = 0;
             for (int i = 0; i < questions.Count; i++)
             {
-                Total += questions[i].Point;
+                Total += questions[i].PointValue;
             }
         }
+
+        public void AddQuestion(Question newQuestion)
+        {
+            Questions.Add(newQuestion);
+            Total += newQuestion.PointValue;
+        }
+
+        public void RunQuiz()
+        {
+            for (int i = 0; i < Questions.Count; i++)
+            {
+                Questions[i].DisplayQuestion();
+                Questions[i].DisplayAnswers();
+                int pts = Questions[i].GetAnswers();
+                UpdateScore(pts);
+            }
+        }
+
+        public void UpdateScore(int x)
+        {
+            Score += x;
+        }
+
+        public void GradeQuiz()
+        {
+            Console.WriteLine("You finished the quiz! Your score is: " + Score + "/" + Total);
+        }
+
     }
 }

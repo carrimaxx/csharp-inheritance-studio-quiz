@@ -6,23 +6,22 @@ namespace FunWithQuizzes
 {
     public abstract class Question
     {
-        public int Point { get; set; }
-        public string Message { get; set; }
+        public int PointValue { get; set; }
+        private string Text { get; set; }
 
-        public Question(int point, string message)
+        public Question(int pointValue, string text)
         {
-            Point = point;
-            Message = message;
+            PointValue = pointValue;
+            Text = text;
         }
 
-        public void PrintQuestion()
+        public void DisplayQuestion()
         {
-            Console.WriteLine(Message);
+            Console.WriteLine(Text);
         }
 
         public abstract void DisplayAnswers();
 
-        //public abstract int GetAnswers(); // why int? : to get point
-      
+        public abstract int GetAnswers();
     }
 }
